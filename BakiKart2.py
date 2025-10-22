@@ -132,13 +132,11 @@ while a > 0:
                 break
             else:
                 print("Error")
-                break      
+                break
+                
 
 
 
+                
 
-
-
-               
-            
-
+                
