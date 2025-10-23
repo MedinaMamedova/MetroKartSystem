@@ -12,6 +12,7 @@ payments = 0
 discounts = 0
 user = ''
 operations = []
+limitoftheaddedbalance = 100
 def criticalbalance (userbalance, debt ,payments):
     if  0.30 <= userbalance <=0.39:
         print("Do you want to use emergency debt? (yes / no)")
@@ -35,14 +36,13 @@ while a > 0:
             print("5-->Daily statics")
             print("6-->Parameters")
             print("0-->Exit") 
-            selectednumber = int(input("select the number among 1 2 3 4 : "))
+            selectednumber = int(input("select the number among 1 2 3 4 5 6 0 : "))
             if selectednumber == 1:
-                print("Balance: ", userbalance)
+                print("Balance: ", round(userbalance , 2))
                 operations.append("showing balance")
             elif selectednumber == 2:
                 addedamount = int(input("add the amount you want"))
-                operations. append("increasing the balance")
-                if totaladdedamount > 100 and addedamount > 100:
+                if totaladdedamount >= limitoftheaddedbalance and addedamount >= limitoftheaddedbalance:
                     print("You exceed the limit")
                 else:
                     totaladdedamount = totaladdedamount + addedamount
@@ -57,6 +57,7 @@ while a > 0:
                             addedamount = addedamount - debt
                             debt = 0
                     userbalance = userbalance+ addedamount
+                operations. append(("increasing the balance", addedamount ))
                 print("Userbalance :", userbalance)
             elif selectednumber == 3:
                 operations.append("usage of subway")
@@ -104,30 +105,32 @@ while a > 0:
                 print("totaladedamount:", totaladdedamount)
             elif selectednumber == 6:
                 operations.append("changing the settings")
-                print("do you want to change your status? (yer/ no)")
-                yesorno = input("select : yes or no ")
-                if yesorno == "yes":
+                print("Changing the password(select 1),changing status(select 2),changing adding balance limit(select 3)")
+                changingsetting= int(input("1 / 2 / 3 "))
+                if changingsetting == 1:
                     newrule = + 1
                     user = input(" Student or Retired ")
-                else:
-                    continue
-                print("Do you want to change your password? (yes / no)")
-                yon = input()
-                if yon == "yes":
+                    print("status changed succesfully")
+                if changingsetting == 2:
                     b=3
                     while b > 0:
-                        yourpassword = int(input("Enter your previous password"))
+                        yourpassword = int(input("Enter your previous password "))
                         if yourpassword == truepassword:
-                            newpassword = int(input("Enter your new 4 digit password"))
+                            newpassword = int(input("Enter your new 4 digit password ")) 
                             print("All done")
-                            newpassword = truepassword
+                            truepassword = newpassword
+                            break
                         else:
                             print("after 3 wrong passsword your account will be blocked, try one more time")
                             b=b-1
                     if b == 0:
                         print("your account is blocked")
                         break
-            elif selectednumber == 7:
+                if changingsetting == 3:
+                    newlimit = int(input("add a new limit"))
+                    limitoftheaddedbalance = newlimit
+                    print("limit was changed succesfully")
+            elif selectednumber == 0:
                 print("Exit...")
                 break
             else:
